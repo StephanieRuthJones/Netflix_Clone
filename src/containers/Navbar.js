@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import axios from '../axios-movies';
 import SearchLogo from '../static/images/search-icon.svg';
@@ -70,10 +71,11 @@ class Navbar extends Component {
 
   onMyListClick = () => {
     // DISPLAYS MOVIE IDES IN USER'S LIST
-    window.alert(JSON.stringify([]));
+    window.alert(JSON.stringify([...this.props.movieIdList]));
   };
 
   render() {
+    console.log("props in Navbar", this.props)
     const { scrolling } = this.state;
 
     return (
@@ -127,7 +129,10 @@ Navbar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-
+  //TODO: UPdate type
+  movieIdList: PropTypes.array
 };
-
-export default withRouter(Navbar);
+const mapStateToProps = (state) => {
+  return { movieIdList: state.myListReducer };
+};
+export default withRouter(connect(mapStateToProps)(Navbar));

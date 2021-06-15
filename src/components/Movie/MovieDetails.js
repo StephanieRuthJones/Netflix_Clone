@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 
 import AddIcon from '../../static/images/add.svg';
 import PlayIcon from '../../static/images/play-button.svg';
+import MinusIcon from '../../static/images/minus.svg'
 
-function MovieDetails({ movie }) {
+import {addMovie, removeMovie} from '../../store/actions'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+function MovieDetails({ movie, addMovie, removeMovie, movieIdList }) {
   const runtime = movie.runtime || movie.episode_run_time;
   const displayRuntime = runtime ? ` Runtime: ${runtime}m` : null;
-
+  const listIncludesMovie = movieIdList.includes(movie.id)
   return (
     <div className="modal__container">
       <h1 className="modal__title">{movie.title || movie.name}</h1>
@@ -29,16 +33,22 @@ function MovieDetails({ movie }) {
         <PlayIcon className="modal__btn--icon" />
         Play
       </button>
-      <button className="modal__btn">
+      {listIncludesMovie 
+      ? <button className="modal__btn" onClick={() => addMovie(movie.id)}>
         <AddIcon className="modal__btn--icon" />
         My List
       </button>
+      : <button className="modal__btn" onClick={() => removeMovie(movie.id)}>
+      <MinusIcon className="modal__btn--icon" />
+      My List
+    </button>}
     </div>
   );
 }
 
 MovieDetails.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number,
     title: PropTypes.string,
     name: PropTypes.string,
     vote_average: PropTypes.number,
@@ -50,5 +60,21 @@ MovieDetails.propTypes = {
     number_of_seasons: PropTypes.number,
     overview: PropTypes.string,
   }),
+  addMovie: PropTypes.func.required,
+  removeMovie: PropTypes.func.required,
+  // TODO: UPdate type:
+  movieIdList: PropTypes.array
 };
-export default MovieDetails;
+const mapStateToProps = (state) => {
+  return {movieIdList: state.myListReducer}
+}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addMovie,
+      removeMovie,
+    },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

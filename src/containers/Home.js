@@ -24,11 +24,14 @@ class Home extends Component {
   closeModal = () => {
     this.setState({ toggleModal: false });
   };
-  handleAddMovieToList = (movieId) => {
-    this.props.addMovie(movieId);
-  };
+
+  handleRemoveMovieFromList = (movieId) => {
+    if(this.props.movieIdList.includes(movieId)){
+      this.props.removeMovie(movieId)
+    }
+  }
   render() {
-    console.log('this.props in HOme.js', this.props.movieIdList);
+    console.log('this.props in HOme.js', this.props);
     return (
       <>
         <div className="main-content">
@@ -56,13 +59,13 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { movieIdList: state.movieIdList };
+  console.log('state', state)
+  return { movieIdList: state.myListReducer };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      addMovie,
       removeMovie,
     },
     dispatch

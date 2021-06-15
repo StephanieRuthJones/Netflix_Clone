@@ -119,7 +119,6 @@ class MainContent extends Component {
       <div className="container">
         <Header
           movie={this.state.selectedMovie}
-          handleAddMovieToList={this.props.handleAddMovieToList}
         />
         <div className="movieShowcase">
           {this.state.movieInfo.map((info) => {
@@ -143,7 +142,6 @@ class MainContent extends Component {
 }
 
 MainContent.propTypes = {
-  handleAddMovieToList: PropTypes.func.isRequired,
   selectMovieHandler: PropTypes.func.isRequired,
   horrorMovies: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
@@ -184,6 +182,7 @@ const mapStateToProps = (state) => {
     comedyMovies: state.comedy,
     documentaries: state.documentary,
     horrorMovies: state.horror,
+
   };
 };
 
@@ -197,6 +196,7 @@ const mapDispatchToProps = (dispatch) => {
       fetchComedyMovies,
       fetchDocumentaries,
       fetchHorrorMovies,
+  
     },
     dispatch
   );

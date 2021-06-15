@@ -15,13 +15,13 @@ export const REMOVE_MOVIE = 'ADD_MOVIE';
 export function addMovie(id) {
   return {
     type: ADD_MOVIE,
-    payload: { id },
+    payload: id,
   };
 }
 export function removeMovie(id) {
   return {
     type: REMOVE_MOVIE,
-    payload: { id },
+    payload: id,
   };
 }
 
