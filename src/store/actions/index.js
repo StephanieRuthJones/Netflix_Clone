@@ -9,6 +9,21 @@ export const FETCH_COMEDY_MOVIES = 'FETCH_COMEDY_MOVIES';
 export const FETCH_HORROR_MOVIES = 'FETCH_HORROR_MOVIES';
 export const FETCH_ROMANCE_MOVIES = 'FETCH_ROMANCE_MOVIES';
 export const FETCH_DOCUMENTARIES = 'FETCH_DOCUMENTARIES';
+export const ADD_MOVIE = 'ADD_MOVIE';
+export const REMOVE_MOVIE = 'ADD_MOVIE';
+
+export function addMovie(id) {
+  return {
+    type: ADD_MOVIE,
+    payload: { id },
+  };
+}
+export function removeMovie(id) {
+  return {
+    type: REMOVE_MOVIE,
+    payload: { id },
+  };
+}
 
 export function fetchTrending() {
   const request = axios.get(
@@ -22,9 +37,7 @@ export function fetchTrending() {
 }
 
 export function fetchNetflixOriginals() {
-  const request = axios.get(
-    `/discover/tv?api_key=${process.env.API_KEY}&with_networks=213`
-  );
+  const request = axios.get(`/discover/tv?api_key=${process.env.API_KEY}`);
 
   return {
     type: FETCH_NETFLIX_ORIGINALS,

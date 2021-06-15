@@ -69,6 +69,7 @@ class Navbar extends Component {
   };
 
   onMyListClick = () => {
+    // DISPLAYS MOVIE IDES IN USER'S LIST
     window.alert(JSON.stringify([]));
   };
 
@@ -126,6 +127,7 @@ Navbar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+
 };
 
 export default withRouter(Navbar);

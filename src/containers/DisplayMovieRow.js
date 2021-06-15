@@ -29,10 +29,7 @@ class DisplayMovieRow extends Component {
   render() {
     const { width } = this.state;
     let netflixUrl = false;
-    if (
-      this.props.url ===
-      `/discover/tv?api_key=${process.env.API_KEY}&with_networks=213`
-    ) {
+    if (this.props.url === `/discover/tv?api_key=${process.env.API_KEY}`) {
       netflixUrl = true;
     }
 
@@ -76,8 +73,7 @@ class DisplayMovieRow extends Component {
             let movieImageUrl =
               'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path;
             if (
-              this.props.url ===
-              `/discover/tv?api_key=${process.env.API_KEY}&with_networks=213`
+              this.props.url === `/discover/tv?api_key=${process.env.API_KEY}`
             ) {
               movieImageUrl =
                 'https://image.tmdb.org/t/p/original/' + movie.poster_path;

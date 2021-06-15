@@ -117,7 +117,10 @@ class MainContent extends Component {
   render() {
     return (
       <div className="container">
-        <Header movie={this.state.selectedMovie} />
+        <Header
+          movie={this.state.selectedMovie}
+          handleAddMovieToList={this.props.handleAddMovieToList}
+        />
         <div className="movieShowcase">
           {this.state.movieInfo.map((info) => {
             if (info.movies.length > 0) {
@@ -140,6 +143,7 @@ class MainContent extends Component {
 }
 
 MainContent.propTypes = {
+  handleAddMovieToList: PropTypes.func.isRequired,
   selectMovieHandler: PropTypes.func.isRequired,
   horrorMovies: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),

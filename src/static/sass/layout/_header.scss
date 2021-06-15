@@ -37,12 +37,15 @@
       padding-top: 1rem;
       background-color: rgba(51, 51, 51, 0.5);
       padding-bottom: 1rem;
-
       &-add {
         width: 15px;
         height: 15px;
         fill: #fff;
         margin-right: 1rem;
+        vertical-align: middle;
+        &-text {
+          vertical-align: middle;
+        }
       }
 
       &-play {
@@ -50,6 +53,10 @@
         height: 15px;
         fill: #fff;
         margin-right: 1rem;
+        vertical-align: middle;
+        &-text {
+          vertical-align: middle;
+        }
       }
 
       &:hover {
