@@ -9,15 +9,14 @@ import PlayLogo from '../static/images/play-button.svg';
 import AddLogo from '../static/images/add.svg';
 import MinusLogo from '../static/images/minus.svg'
 
-function Header({ movie, movieIdList, addMovie, removeMovie}) {
+function Header({ movie, movieList, addMovie, removeMovie }) {
   const backgroundStyle = {
     backgroundSize: 'cover',
     backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
     backgroundPosition: 'center',
   };
-  const listIncludesMovie = movieIdList.includes(movie.id)
-  
 
+  const listIncludesMovie = movieList.includes(movie)
   return (
     <header style={backgroundStyle} className="header">
       <div className="header__container">
@@ -29,22 +28,22 @@ function Header({ movie, movieIdList, addMovie, removeMovie}) {
           <PlayLogo className="header__container-btnMyList-play" />
           <span className="header__container-btnMyList-add-text">Play</span>
         </button>
-        {listIncludesMovie 
-          ? <button
+        {listIncludesMovie
+          ? (<button
             className="header__container-btnMyList"
-            onClick={() => addMovie(movie.id)}
-            >
-              <AddLogo className="header__container-btnMyList-add" />
-              <span className="header__container-btnMyList-add-text">My List</span>
-            </button>
-        : <button
-          className="header__container-btnMyList"
-          onClick={() => removeMovie(movie.id)}
-        >
-          {/* TODO: UPDATE ADD CLASS */}
-          <MinusLogo className="header__container-btnMyList-add" />
-          <span className="header__container-btnMyList-add-text">My List</span>
-        </button>}
+            onClick={() => removeMovie(movie.id)}
+          >
+            <MinusLogo className="header__container-btnMyList-add" />
+            <span className="header__container-btnMyList-add-text">My List</span>
+          </button>)
+          : (<button
+            className="header__container-btnMyList"
+            onClick={() => addMovie(movie)}
+          >
+            <AddLogo className="header__container-btnMyList-add" />
+            <span className="header__container-btnMyList-add-text">My List</span>
+          </button>)
+        }
         <p className="header__container-overview">{movie.overview}</p>
       </div>
       <div className="header--fadeBottom"></div>
@@ -53,18 +52,18 @@ function Header({ movie, movieIdList, addMovie, removeMovie}) {
 }
 Header.propTypes = {
   movie: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     overview: PropTypes.string,
     backdrop_path: PropTypes.string,
   }).isRequired,
-  // TODO: UPDATE TYPE
-  movieIdList: PropTypes.array,
-  addMovie: PropTypes.func.isRequired,
-  removeMovie: PropTypes.func.isRequired,
+  addMovie: PropTypes.func,
+  removeMovie: PropTypes.func,
+  // TODO: UPdate type:
+  movieList: PropTypes.array
 };
 const mapStateToProps = (state) => {
-  return {movieIdList: state.myListReducer}
+  return { movieList: state.movieList }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(

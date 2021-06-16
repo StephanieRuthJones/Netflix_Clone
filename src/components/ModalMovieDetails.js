@@ -6,10 +6,10 @@ import MinusIcon from '../static/images/minus.svg'
 import {addMovie, removeMovie} from '../../store/actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-function ModalMovieDetails({ movie, addMovie, removeMovie, movieIdList}) {
+function ModalMovieDetails({ movie, addMovie, removeMovie, movieList}) {
   const runtime = movie.runtime || movie.episode_run_time;
   const displayRuntime = runtime ? ` Runtime: ${runtime}m` : null;
-const listIncludesMovie = movieIdList.includes(movie.id)
+const listIncludesMovie = movieList.includes(movie)
   return (
     <div className="modal__container">
       <h1 className="modal__title">{movie.title || movie.name}</h1>
@@ -34,11 +34,11 @@ const listIncludesMovie = movieIdList.includes(movie.id)
       </button>
       
       {listIncludesMovie 
-      ?   <button className="modal__btn" onClick={() => addMovie(movie.id)}>
+      ?   <button className="modal__btn" onClick={() => addMovie(movie)}>
       <AddIcon className="modal__btn--icon" />
       My List
     </button>
-      :   <button className="modal__btn" onClick={() => removeMovie(movie.id)}>
+      :   <button className="modal__btn" onClick={() => removeMovie(movie)}>
       <MinusIcon className="modal__btn--icon" />
       My List
     </button>}
@@ -62,10 +62,10 @@ ModalMovieDetails.propTypes = {
   addMovie: PropTypes.func.required,
   removeMovie: PropTypes.func.required,
   // TODO: UPdate type:
-  movieIdList: PropTypes.array
+  movieList: PropTypes.array
 };
 const mapStateToProps = (state) => {
-  return {movieIdList: state.myListReducer}
+  return {movieList: state.movieList}
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(

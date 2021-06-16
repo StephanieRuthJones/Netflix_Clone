@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MainContent from './MainContent';
 import Modal from '../components/UI/Modal';
 import MovieDetails from '../components/Movie/MovieDetails';
-import { addMovie, removeMovie } from '../store/actions/index';
 
 class Home extends Component {
   state = {
@@ -25,19 +23,12 @@ class Home extends Component {
     this.setState({ toggleModal: false });
   };
 
-  handleRemoveMovieFromList = (movieId) => {
-    if(this.props.movieIdList.includes(movieId)){
-      this.props.removeMovie(movieId)
-    }
-  }
   render() {
-    console.log('this.props in HOme.js', this.props);
     return (
       <>
         <div className="main-content">
           <MainContent
             selectMovieHandler={this.selectMovieHandler}
-            handleAddMovieToList={this.handleAddMovieToList}
           />
         </div>
         <Modal
@@ -55,20 +46,12 @@ class Home extends Component {
 Home.propTypes = {
   addMovie: PropTypes.func,
   // TODO: UPDATE TYPE
-  movieIdList: PropTypes.array,
+  movieList: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
-  console.log('state', state)
-  return { movieIdList: state.myListReducer };
+  return { movieList: state.movieList };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      removeMovie,
-    },
-    dispatch
-  );
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+export default connect(mapStateToProps, null)(Home);

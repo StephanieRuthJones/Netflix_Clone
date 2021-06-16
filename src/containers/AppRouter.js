@@ -6,17 +6,19 @@ import NotFound from './NotFound';
 import Search from './Search';
 import Navbar from './Navbar';
 
-const AppRouter = () => (
-  <BrowserRouter>
-    <>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/search" component={Search} />
-        <Route component={NotFound} />
-      </Switch>
-    </>
-  </BrowserRouter>
-);
+const AppRouter = () => {
+  return (
+    <BrowserRouter>
+      <>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/search" component={Search} />
+          <Route component={NotFound} />
+        </Switch>
+      </>
+    </BrowserRouter>
+  )
+};
 
 export default AppRouter;

@@ -70,12 +70,12 @@ class Navbar extends Component {
   };
 
   onMyListClick = () => {
-    // DISPLAYS MOVIE IDES IN USER'S LIST
-    window.alert(JSON.stringify([...this.props.movieIdList]));
+    // DISPLAYS MOVIE IDS IN USER'S LIST
+    const movieIdList = this.props.movieList.map(movie => movie.id).join(", ")
+    window.alert(JSON.stringify(movieIdList));
   };
 
   render() {
-    console.log("props in Navbar", this.props)
     const { scrolling } = this.state;
 
     return (
@@ -130,9 +130,9 @@ Navbar.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   //TODO: UPdate type
-  movieIdList: PropTypes.array
+  movieList: PropTypes.array
 };
 const mapStateToProps = (state) => {
-  return { movieIdList: state.myListReducer };
+  return { movieList: state.movieList };
 };
 export default withRouter(connect(mapStateToProps)(Navbar));

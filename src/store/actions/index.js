@@ -10,18 +10,18 @@ export const FETCH_HORROR_MOVIES = 'FETCH_HORROR_MOVIES';
 export const FETCH_ROMANCE_MOVIES = 'FETCH_ROMANCE_MOVIES';
 export const FETCH_DOCUMENTARIES = 'FETCH_DOCUMENTARIES';
 export const ADD_MOVIE = 'ADD_MOVIE';
-export const REMOVE_MOVIE = 'ADD_MOVIE';
+export const REMOVE_MOVIE = 'REMOVE_MOVIE';
 
-export function addMovie(id) {
+export function addMovie(movie) {
   return {
     type: ADD_MOVIE,
-    payload: id,
+    payload: movie,
   };
 }
-export function removeMovie(id) {
+export function removeMovie(movie) {
   return {
     type: REMOVE_MOVIE,
-    payload: id,
+    payload: movie,
   };
 }
 

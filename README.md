@@ -33,12 +33,23 @@ The "My List" functionality is half built out, there are buttons for adding titl
 
 _User stories_
 
-[] 1. A user should be able to add a movie to their list via the "+ My List" button
-[] 2. If a user is viewing a movie that is already within their list the "+ My List" button should change to "- My List" and should remove the movie from their list.
-[] 3. A user should be able to see all their movie ids in their list by clicking the "My List" tab in the top navbar (just in an alert modal as it is currently).
+[X] 1. A user should be able to add a movie to their list via the "+ My List" button
+[X] 2. If a user is viewing a movie that is already within their list the "+ My List" button should change to "- My List" and should remove the movie from their list.
+[X] 3. A user should be able to see all their movie ids in their list by clicking the "My List" tab in the top navbar (just in an alert modal as it is currently).
 
 _Considerations_
 
 - State only needs to be stored client side (within memory and stored to local storage, no back-end persistence)
 - Code style/architecture should reasonably match existing
 - This is limited to only showing the movie IDs in the My List, no need to build out the full UI for this project.
+
+IMPROVEMENTS:
+- Code splitting
+- Tests
+- Error Boundaries
+- Fail cases for all reducers
+- Data caching
+- loading animation
+- redux toolkit
+- concat strings with template literal
+- Make repeated funcs reusable / in utils
