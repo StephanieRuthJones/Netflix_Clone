@@ -196,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
       fetchComedyMovies,
       fetchDocumentaries,
       fetchHorrorMovies,
-  
+
     },
     dispatch
   );
