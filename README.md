@@ -45,11 +45,31 @@ _Considerations_
 
 IMPROVEMENTS:
 - Code splitting
-- Tests
+- Tests (https://jestjs.io/) for reducers / code
 - Error Boundaries
 - Fail cases for all reducers
 - Data caching
 - loading animation
 - redux toolkit
-- concat strings with template literal
+- Concat strings with template literal
+- Consolidate repeated funcs / action creators
 - Make repeated funcs reusable / in utils
+- Implement library such as redux-persist to handle localStorage state
+- Read: https://slashgear.github.io/react-redux-pitfalls-and-best-pratices/
+- Use middleware to simplify fetch calls: 
+```
+const http = store => next => async action => {
+  if (action.http) {
+    try {
+      action.result = await fetch(action.http)
+    } catch (error) {
+      // Do something
+    }
+  }
+  return next(action)
+}
+
+// in redux store init
+const exampleApp = combineReducers(reducers)
+const store = createStore(exampleApp, applyMiddleware(http))
+```
