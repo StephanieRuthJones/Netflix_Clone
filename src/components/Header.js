@@ -61,11 +61,15 @@ Header.propTypes = {
   }).isRequired,
   addMovie: PropTypes.func,
   removeMovie: PropTypes.func,
-  // TODO: UPdate type:
-  movieList: PropTypes.array
+  movieList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    overview: PropTypes.string,
+    backdrop_path: PropTypes.string,
+  }))
 };
+
 const mapStateToProps = (state) => {
-  console.log('state in header', state)
   return { movieList: state.movieList }
 }
 const mapDispatchToProps = (dispatch) => {

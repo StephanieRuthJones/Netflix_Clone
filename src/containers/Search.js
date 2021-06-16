@@ -33,7 +33,6 @@ class Search extends Component {
   };
 
   closeModal = () => {
-    // TODO use functional component + React Hooks
     this.setState({ toggleModal: false });
   };
 
@@ -42,7 +41,6 @@ class Search extends Component {
     this.setState({ toggleModal: true });
 
     let url;
-    // TODO remove magic strings - change to constants
     if (movie.media_type === 'movie') {
       const movieId = movie.id;
       url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`;

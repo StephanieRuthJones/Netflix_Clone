@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import MainContent from './MainContent';
 import Modal from '../components/UI/Modal';
 import MovieDetails from '../components/Movie/MovieDetails';
@@ -45,13 +44,9 @@ class Home extends Component {
 
 Home.propTypes = {
   addMovie: PropTypes.func,
-  // TODO: UPDATE TYPE
-  movieList: PropTypes.array,
-};
-
-const mapStateToProps = (state) => {
-  return { movieList: state.movieList };
 };
 
 
-export default connect(mapStateToProps, null)(Home);
+
+
+export default Home;

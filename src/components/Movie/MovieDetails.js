@@ -64,8 +64,19 @@ MovieDetails.propTypes = {
   }),
   addMovie: PropTypes.func,
   removeMovie: PropTypes.func,
-  // TODO: UPdate type:
-  movieList: PropTypes.array
+  movieList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    name: PropTypes.string,
+    vote_average: PropTypes.number,
+    release_date: PropTypes.string,
+    first_air_date: PropTypes.string,
+    runtime: PropTypes.string,
+    episode_run_time: PropTypes.string,
+    number_of_episodes: PropTypes.number,
+    number_of_seasons: PropTypes.number,
+    overview: PropTypes.string,
+  }))
 };
 const mapStateToProps = (state) => {
   return { movieList: state.movieList }
