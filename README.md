@@ -47,6 +47,7 @@ IMPROVEMENTS:
 - Code splitting
 - Tests (https://jestjs.io/) for reducers / code
 - Error Boundaries
+- Create folders / files to organize things like api call funcs
 - Fail cases for all reducers
 - Data caching
 - loading animation
