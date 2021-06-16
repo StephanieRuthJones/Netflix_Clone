@@ -19,7 +19,6 @@ function Header({ movie, movieList, addMovie, removeMovie }) {
 
   const isInList = listIncludesMovie(movie, movieList)
 
-  console.log('movieList in modalmoviedetails', movieList.map(movie => movie.name))
   return (
     <header style={backgroundStyle} className="header">
       <div className="header__container">
