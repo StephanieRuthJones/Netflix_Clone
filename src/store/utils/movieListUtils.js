@@ -1,0 +1,1 @@
+export const listIncludesMovie = (movie, movieList) => movieList.map(movieInList => movieInList.id).includes(movie.id)

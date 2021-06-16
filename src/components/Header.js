@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addMovie, removeMovie } from '../store/actions/index';
-
+import { listIncludesMovie } from '../store/utils/movieListUtils';
 
 import PlayLogo from '../static/images/play-button.svg';
 import AddLogo from '../static/images/add.svg';
 import MinusLogo from '../static/images/minus.svg'
 
 function Header({ movie, movieList, addMovie, removeMovie }) {
+
   const backgroundStyle = {
     backgroundSize: 'cover',
     backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
     backgroundPosition: 'center',
   };
 
-  const listIncludesMovie = movieList.includes(movie)
+  const isInList = listIncludesMovie(movie, movieList)
+
+  console.log('movieList in modalmoviedetails', movieList.map(movie => movie.name))
   return (
     <header style={backgroundStyle} className="header">
       <div className="header__container">
@@ -28,10 +31,10 @@ function Header({ movie, movieList, addMovie, removeMovie }) {
           <PlayLogo className="header__container-btnMyList-play" />
           <span className="header__container-btnMyList-add-text">Play</span>
         </button>
-        {listIncludesMovie
+        {isInList
           ? (<button
             className="header__container-btnMyList"
-            onClick={() => removeMovie(movie.id)}
+            onClick={() => removeMovie(movie)}
           >
             <MinusLogo className="header__container-btnMyList-add" />
             <span className="header__container-btnMyList-add-text">My List</span>
@@ -63,6 +66,7 @@ Header.propTypes = {
   movieList: PropTypes.array
 };
 const mapStateToProps = (state) => {
+  console.log('state in header', state)
   return { movieList: state.movieList }
 }
 const mapDispatchToProps = (dispatch) => {

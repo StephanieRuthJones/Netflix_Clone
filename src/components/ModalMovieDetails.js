@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import AddIcon from '../static/images/add.svg';
 import PlayIcon from '../static/images/play-button.svg';
 import MinusIcon from '../static/images/minus.svg'
-import {addMovie, removeMovie} from '../../store/actions'
+import { addMovie, removeMovie } from '../../store/actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-function ModalMovieDetails({ movie, addMovie, removeMovie, movieList}) {
+import { listIncludesMovie } from '../store/utils/movieListUtils'
+function ModalMovieDetails({ movie, addMovie, removeMovie, movieList }) {
   const runtime = movie.runtime || movie.episode_run_time;
   const displayRuntime = runtime ? ` Runtime: ${runtime}m` : null;
-const listIncludesMovie = movieList.includes(movie)
+  const isInList = listIncludesMovie(movie, movieList)
   return (
     <div className="modal__container">
       <h1 className="modal__title">{movie.title || movie.name}</h1>
@@ -32,16 +33,16 @@ const listIncludesMovie = movieList.includes(movie)
         <PlayIcon className="modal__btn--icon" />
         Play
       </button>
-      
-      {listIncludesMovie 
-      ?   <button className="modal__btn" onClick={() => addMovie(movie)}>
-      <AddIcon className="modal__btn--icon" />
-      My List
-    </button>
-      :   <button className="modal__btn" onClick={() => removeMovie(movie)}>
-      <MinusIcon className="modal__btn--icon" />
-      My List
-    </button>}
+
+      {isInList
+        ? <button className="modal__btn" onClick={() => addMovie(movie)}>
+          <AddIcon className="modal__btn--icon" />
+          My List
+        </button>
+        : <button className="modal__btn" onClick={() => removeMovie(movie)}>
+          <MinusIcon className="modal__btn--icon" />
+          My List
+        </button>}
     </div>
   );
 }
@@ -65,7 +66,7 @@ ModalMovieDetails.propTypes = {
   movieList: PropTypes.array
 };
 const mapStateToProps = (state) => {
-  return {movieList: state.movieList}
+  return { movieList: state.movieList }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
