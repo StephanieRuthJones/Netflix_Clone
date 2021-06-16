@@ -12,7 +12,26 @@ export const loadState = () => {
         return undefined;
     }
 };
-
+const persistedState = loadState();
+const store = createStore(
+    app,
+    persistedState
+);
+store.subscribe(() => {
+    saveState({
+        movieList: store.getState().movieList
+    });
+});
+// const persistedState = loadState()
+// const configureStore = (preloadedState) => {
+//   const middlewares = [promise]
+//   const middlewareEnhancer = applyMiddleware(...middlewares)
+//   const enhancers = [middlewareEnhancer]
+//   const composedEnhancers = compose(...enhancers)
+//   const store = createStore(rootReducer, preloadedState, composedEnhancers)
+//   return store
+// }
+// const store = configureStore(persistedState)
 export const saveState = state => {
     try {
         const serializedState = JSON.stringify(state);

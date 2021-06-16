@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, configureStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './store/reducers';
 import promise from 'redux-promise';
 import '@babel/polyfill';
@@ -11,7 +11,7 @@ import 'swiper/swiper-bundle.min.css';
 // Import main sass file to apply global styles
 import './static/sass/style.scss';
 import { loadState } from './store/local_storage/localStorage';
-const persistedState = loadState()
+import rootReducer from './store/reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 const app = (
